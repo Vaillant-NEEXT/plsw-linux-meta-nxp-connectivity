@@ -1,0 +1,17 @@
+PN = "openthread-iwxxx"
+SUMMARY = "OT-DAEMON on i.MX boards for IWxxx 3-radios on SPI"
+DESCRIPTION = "OPENTHREAD applications"
+LICENSE = "BSD-3-Clause"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=543b6fe90ec5901a683320a36390c65f"
+
+DEPENDS += " avahi boost readline "
+RDEPENDS_${PN} += " libavahi-client readline "
+
+TARGET_CFLAGS += " -Wno-error "
+
+inherit cmake
+
+include iw612_ot_src_rev_opts_patches.inc
+BIN_NAME_PATTERN = "-iwxxx"
+# GCC15 Compatibility with CMake < 3.5 has been removed from CMake.
+EXTRA_OECMAKE += "-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
